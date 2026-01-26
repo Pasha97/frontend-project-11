@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/svg+xml" href="/rss.svg"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>RSS App — Удобный агрегатор новостей и блогов</title>
+    <meta name="description" content="RSS App — это простой и быстрый агрегатор RSS-лент. Читайте новости, блоги и обновления из разных источников в одном месте.">
+    <meta name="og:title" content="RSS App — Удобный агрегатор новостей и блогов">
+    <meta name="og:description" content="RSS App — это простой и быстрый агрегатор RSS-лент. Читайте новости, блоги и обновления из разных источников в одном месте.">
+    <meta name="og:og:type" content="website">
+    <meta property="og:url" content="https://test.ru/">
+    <meta property="og:image" content="https://test.ru/rss.svg">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+<main class="flex-grow-1">
+    <section class="container-fluid bg-dark p-5">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto text-white">
+                <h1 class="display-3 mb-0">RSS агрегатор</h1>
+                <p class="lead">Начните читать RSS сегодня! Это легко, это красиво.</p>
+                <form id="rss-form" method="POST">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" name="url" class="form-control w-100" id="floatingInput"
+                                       placeholder="ссылка RSS">
+                                <label for="floatingInput">ссылка RSS</label>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="h-100 btn btn-lg btn-primary px-sm-5">Добавить</button>
+                        </div>
+                    </div>
+                    <p class="mt-2 mb-0 text-secondary">Пример: https://lorem-rss.hexlet.app/feed</p>
+                    <p class="feedback m-0 position-absolute small"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+<div id="app"></div>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
