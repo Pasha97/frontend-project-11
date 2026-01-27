@@ -1,9 +1,11 @@
 import './style.css'
 import 'bootstrap'
-import { string } from 'yup';
-import { initView } from './view.js'
 import onChange from "on-change";
-import { FORM_BTN_SELECTOR, FORM_INPUT_SELECTOR, FORM_MESSAGE_SELECTOR, MESSAGE_TYPE, STATUS } from "./constants";
+
+import { initView } from './view'
+import { initI18n } from "./i18n";
+import { validate } from "./validate";
+import { FORM_BTN_SELECTOR, FORM_INPUT_SELECTOR, FORM_MESSAGE_SELECTOR, STATUS } from "./constants";
 
 const rssList = [];
 const initialState = {
@@ -18,35 +20,26 @@ const elements = {
     message: document.querySelector(FORM_MESSAGE_SELECTOR),
 }
 
-const state = onChange(initialState, initView(elements, initialState))
+initI18n().then((i18nInstance) => {
+    const state = onChange(initialState, initView(elements, initialState, i18nInstance))
 
-const validateURl = string().url().required();
+    elements.submit.onclick = (e) => {
+        e.preventDefault()
 
-const validate = (value) => {
-    return validateURl.isValid(value)
-        .then(isValid => {
-            if (isValid) {
-                return { isValid: true, error: '' };
-            } else {
-                return { isValid: false, error: !value ? MESSAGE_TYPE.ERROR_EMPTY : MESSAGE_TYPE.ERROR };
-            }
-        })
-};
+        const url = elements.input.value;
 
-elements.submit.onclick = (e) => {
-    e.preventDefault()
+        validate(url, rssList)
+            .then(({ isValid, error }) => {
+                if (isValid) {
+                    state.status = STATUS.VALIDATE;
+                    state.message = 'messages.success.add'
 
-    const url = elements.input.value;
+                    rssList.push(url)
+                } else {
+                    state.status = STATUS.INVALIDATE;
+                    state.message = error
+                }
+            })
+    }
+})
 
-    validate(url).then(({ isValid, error }) => {
-        if (isValid) {
-            state.status = STATUS.VALIDATE;
-            state.message = MESSAGE_TYPE.SUCCESS
-
-            rssList.push(url)
-        } else {
-            state.status = STATUS.INVALIDATE;
-            state.message = error
-        }
-    })
-}

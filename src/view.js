@@ -1,6 +1,6 @@
 import { STATUS, TEXT_CLASS, VALIDATE_CLASS } from "./constants";
 
-export const initView = (elements, state) => {
+export const initView = (elements, state, i18n) => {
     const { input, message } = elements
 
     const render = () => {
@@ -10,14 +10,12 @@ export const initView = (elements, state) => {
         if (state.status === STATUS.VALIDATE) {
             input.classList.add(VALIDATE_CLASS[STATUS.VALIDATE]);
             message.classList.add(TEXT_CLASS[STATUS.VALIDATE]);
-            console.log('valid')
         } else {
             input.classList.add(VALIDATE_CLASS[STATUS.INVALIDATE]);
             message.classList.add(TEXT_CLASS[STATUS.INVALIDATE]);
-            console.log('invalid')
         }
 
-        message.textContent = state.message;
+        message.textContent = i18n.t(state.message);
     }
 
     return render
