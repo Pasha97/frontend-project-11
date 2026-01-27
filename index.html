@@ -20,21 +20,21 @@
             <div class="col-md-10 col-lg-8 mx-auto text-white">
                 <h1 class="display-3 mb-0">RSS агрегатор</h1>
                 <p class="lead">Начните читать RSS сегодня! Это легко, это красиво.</p>
-                <form id="rss-form" method="POST">
+                <form id="rss-form" action="">
                     <div class="row">
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="url" class="form-control w-100" id="floatingInput"
+                                <input type="text" name="url" class="form-control w-100 js-form-input" id="floatingInput"
                                        placeholder="ссылка RSS">
                                 <label for="floatingInput">ссылка RSS</label>
                             </div>
                         </div>
                         <div class="col-auto">
-                            <button type="submit" class="h-100 btn btn-lg btn-primary px-sm-5">Добавить</button>
+                            <button type="submit" class="h-100 btn btn-lg btn-primary px-sm-5 js-form-btn">Добавить</button>
                         </div>
                     </div>
                     <p class="mt-2 mb-0 text-secondary">Пример: https://lorem-rss.hexlet.app/feed</p>
-                    <p class="feedback m-0 position-absolute small"></p>
+                    <p class="feedback m-0 position-absolute small js-form-message">ТЕст</p>
                 </form>
             </div>
         </div>
