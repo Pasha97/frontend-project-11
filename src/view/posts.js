@@ -1,10 +1,13 @@
-const createPostElement = ({ title, id, link }) => {
+const createPostElement = ({ title, id, link }, state) => {
     const item = document.createElement('li');
     item.classList.add('list-group-item', 'mb-4', 'border-0', 'd-flex', 'justify-content-between', 'align-items-center', 'p-0');
 
     const heading = document.createElement('h3');
     heading.classList.add('h5', 'mb-0');
     heading.textContent = title;
+
+    const classTitle = state.posts.viewedIds.has(id) ? 'fw-normal' : 'fw-bold';
+    heading.classList.add(classTitle);
 
     const linkElement = document.createElement('a');
     linkElement.href = link;
@@ -13,7 +16,9 @@ const createPostElement = ({ title, id, link }) => {
     const btn = document.createElement('div');
     btn.classList.add('btn', 'btn-outline-primary', 'btn-sm');
     btn.textContent = 'Просмотр';
-    btn.id = id;
+    btn.setAttribute('postId', id);
+    btn.setAttribute('data-bs-toggle', 'modal');
+    btn.setAttribute('data-bs-target', '#modal');
 
     item.append(linkElement, btn);
 
@@ -25,7 +30,7 @@ const renderFeeds = (elements, state) => {
 
     postsContainer.innerHTML = '';
 
-    const postItems = state.posts.map(item => createPostElement(item));
+    const postItems = state.posts.items.map(item => createPostElement(item, state));
 
     postsContainer.append(...postItems);
 }

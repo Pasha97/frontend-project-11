@@ -2,7 +2,7 @@ import './style.css'
 import 'bootstrap'
 import onChange from "on-change";
 
-import { renderForm, renderPosts, renderFeeds } from './view'
+import { renderForm, renderPosts, renderFeeds, renderModal } from './view'
 import { initI18n } from "./i18n";
 import { validate } from "./validate";
 import {
@@ -29,8 +29,11 @@ const initialState = {
         status: REQUEST_STATUS.IDLE,
     },
     urls: [],
-    posts: [],
-    postLinks: new Set(),
+    posts: {
+        items: [],
+        links: new Set(),
+        viewedIds: new Set(),
+    },
     feeds: []
 }
 
@@ -51,6 +54,10 @@ initI18n().then((i18nInstance) => {
         if (path.includes('request')) {
             renderForm(elements, initialState, i18nInstance);
             renderFeeds(elements, initialState)
+            renderPosts(elements, initialState)
+        }
+
+        if (path.includes('posts.viewedIds')) {
             renderPosts(elements, initialState)
         }
     })
@@ -74,6 +81,18 @@ initI18n().then((i18nInstance) => {
             setTimeout(checkNewPosts, POSTS_UPDATE_INTERVAL);
         })
     };
+
+    elements.postsContainer.addEventListener('click', (e) => {
+        const postId = e.target.getAttribute('postId');
+
+        if (!postId) {
+            return;
+        }
+
+        state.posts.viewedIds.add(postId);
+        const post = state.posts.items.find(item => item.id === postId);
+        renderModal(post)
+    });
 
     elements.submit.onclick = (e) => {
         e.preventDefault()

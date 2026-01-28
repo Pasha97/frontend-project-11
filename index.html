@@ -5,9 +5,11 @@
     <link rel="icon" type="image/svg+xml" href="/rss.svg"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>RSS App — Удобный агрегатор новостей и блогов</title>
-    <meta name="description" content="RSS App — это простой и быстрый агрегатор RSS-лент. Читайте новости, блоги и обновления из разных источников в одном месте.">
+    <meta name="description"
+          content="RSS App — это простой и быстрый агрегатор RSS-лент. Читайте новости, блоги и обновления из разных источников в одном месте.">
     <meta name="og:title" content="RSS App — Удобный агрегатор новостей и блогов">
-    <meta name="og:description" content="RSS App — это простой и быстрый агрегатор RSS-лент. Читайте новости, блоги и обновления из разных источников в одном месте.">
+    <meta name="og:description"
+          content="RSS App — это простой и быстрый агрегатор RSS-лент. Читайте новости, блоги и обновления из разных источников в одном месте.">
     <meta name="og:og:type" content="website">
     <meta property="og:url" content="https://frontend-project-11-psi-amber.vercel.app">
     <meta property="og:image" content="https://frontend-project-11-psi-amber.vercel.app/rss.svg">
@@ -24,16 +26,19 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-floating">
-                                <input type="text" name="url" class="form-control w-100 js-form-input" id="floatingInput"
+                                <input type="text" name="url" class="form-control w-100 js-form-input"
+                                       id="floatingInput"
                                        placeholder="ссылка RSS">
                                 <label for="floatingInput">ссылка RSS</label>
                             </div>
                         </div>
                         <div class="col-auto">
-                            <button type="submit" class="h-100 btn btn-lg btn-primary px-sm-5 js-form-btn">Добавить</button>
+                            <button type="submit" class="h-100 btn btn-lg btn-primary px-sm-5 js-form-btn">Добавить
+                            </button>
                         </div>
                     </div>
-                    <p class="mt-2 mb-0 text-secondary">Пример: https://lorem-rss.hexlet.app/feed</p>
+                    <p class="mt-2 mb-0 text-secondary">Пример: https://lorem-rss.hexlet.app/feed,
+                        https://lorem-rss.hexlet.app/feed?unit=second&interval=30</p>
                     <p class="feedback m-0 position-absolute small js-form-message"></p>
                 </form>
             </div>
@@ -51,6 +56,22 @@
             </div>
         </div>
     </section>
+
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title js-modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-break js-modal-description"></div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary js-modal-link" target="_blank">Читать полностью</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 <div id="app"></div>
 <script type="module" src="/src/main.js"></script>
