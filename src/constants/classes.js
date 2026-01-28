@@ -1,5 +1,7 @@
 import { STATUS } from "./core";
 
+export const DISABLED_CLASS = 'disabled';
+
 export const TEXT_CLASS = {
     [STATUS.VALIDATE]: 'text-success',
     [STATUS.INVALIDATE]: 'text-danger',

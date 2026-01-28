@@ -6,7 +6,7 @@ setLocale({
         required: 'messages.errors.required',
     },
     string: {
-        url: 'messages.errors.invalid',
+        url: 'messages.errors.invalidUrl',
     },
 })
 

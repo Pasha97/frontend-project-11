@@ -1,3 +1,5 @@
 export const FORM_INPUT_SELECTOR = '.js-form-input'
 export const FORM_BTN_SELECTOR = '.js-form-btn'
 export const FORM_MESSAGE_SELECTOR = '.js-form-message'
+export const FEEDS_SELECTOR = '.js-feeds'
+export const POSTS_SELECTOR = '.js-posts'

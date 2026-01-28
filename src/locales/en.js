@@ -2,13 +2,15 @@ export default {
     translation: {
         messages: {
             errors: {
-                invalid: 'The link must be a valid URL',
-                required: 'The field is required',
+                invalidUrl: 'The URL must be valid',
+                required: 'This field is required',
                 duplicate: 'RSS already exists',
+                invalidRss: 'The resource is not a valid RSS feed',
+                network: 'An error occurred while loading',
             },
             success: {
-                add: 'RSS has been successfully loaded'
+                add: 'RSS successfully added'
             },
         },
     },
-}
+};

@@ -9,8 +9,8 @@
     <meta name="og:title" content="RSS App — Удобный агрегатор новостей и блогов">
     <meta name="og:description" content="RSS App — это простой и быстрый агрегатор RSS-лент. Читайте новости, блоги и обновления из разных источников в одном месте.">
     <meta name="og:og:type" content="website">
-    <meta property="og:url" content="https://test.ru/">
-    <meta property="og:image" content="https://test.ru/rss.svg">
+    <meta property="og:url" content="https://frontend-project-11-psi-amber.vercel.app">
+    <meta property="og:image" content="https://frontend-project-11-psi-amber.vercel.app/rss.svg">
     <meta name="robots" content="noindex, nofollow">
 </head>
 <body>
@@ -34,8 +34,20 @@
                         </div>
                     </div>
                     <p class="mt-2 mb-0 text-secondary">Пример: https://lorem-rss.hexlet.app/feed</p>
-                    <p class="feedback m-0 position-absolute small js-form-message">ТЕст</p>
+                    <p class="feedback m-0 position-absolute small js-form-message"></p>
                 </form>
+            </div>
+        </div>
+    </section>
+    <section class="container-fluid container-xxl p-5">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 order-1 mx-auto">
+                <h2 class="h3">Посты</h2>
+                <div class="list-group js-posts"></div>
+            </div>
+            <div class="col-md-10 col-lg-4 mx-auto order-0 order-lg-1">
+                <h2 class="h3">Фиды</h2>
+                <div class="list-group js-feeds"></div>
             </div>
         </div>
     </section>
