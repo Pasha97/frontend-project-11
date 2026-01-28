@@ -1,4 +1,4 @@
-const createPostElement = ({ title, description, link }) => {
+const createPostElement = ({ title, id, link }) => {
     const item = document.createElement('li');
     item.classList.add('list-group-item', 'mb-4', 'border-0', 'd-flex', 'justify-content-between', 'align-items-center', 'p-0');
 
@@ -13,7 +13,7 @@ const createPostElement = ({ title, description, link }) => {
     const btn = document.createElement('div');
     btn.classList.add('btn', 'btn-outline-primary', 'btn-sm');
     btn.textContent = 'Просмотр';
-    btn.id = 'test';
+    btn.id = id;
 
     item.append(linkElement, btn);
 

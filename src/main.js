@@ -14,6 +14,10 @@ import {
     STATUS
 } from "./constants";
 import { loadRssFeed } from "./api/rss.js";
+import { addNewPosts } from "./helpers/index.js";
+import { normalizeItem } from "./utils/common.js";
+
+const POSTS_UPDATE_INTERVAL = 5000;
 
 const initialState = {
     form: {
@@ -26,6 +30,7 @@ const initialState = {
     },
     urls: [],
     posts: [],
+    postLinks: new Set(),
     feeds: []
 }
 
@@ -50,6 +55,26 @@ initI18n().then((i18nInstance) => {
         }
     })
 
+    const checkNewPosts = () => {
+        if (!state.urls.length) {
+            return;
+        }
+
+        const promises = state.urls.map((url) =>
+            loadRssFeed(url)
+                .then((feeds) => {
+                    addNewPosts(state, feeds.items);
+                })
+                .catch((err) => {
+                    console.warn(`Error loading RSS ${url}:`, err);
+                })
+        );
+
+        Promise.allSettled(promises).finally(() => {
+            setTimeout(checkNewPosts, POSTS_UPDATE_INTERVAL);
+        })
+    };
+
     elements.submit.onclick = (e) => {
         e.preventDefault()
 
@@ -61,22 +86,25 @@ initI18n().then((i18nInstance) => {
                     state.request.status = REQUEST_STATUS.LOADING;
                     state.form.status = STATUS.VALIDATE;
 
-                    loadRssFeed(url).then(
-                        feeds => {
-                            state.urls.push(url)
+                    loadRssFeed(url).then(feeds => {
+                        state.urls.push(url)
 
-                            initialState.feeds.push({ title: feeds.title, description: feeds.description });
-                            initialState.posts.push(...feeds.items);
+                        const feedItem = { title: feeds.title, description: feeds.description }
+                        state.feeds.push(normalizeItem(feedItem));
+                        addNewPosts(state, feeds.items);
 
-                            state.form.value = ''
-                            state.form.message = 'messages.success.add';
-                            state.request.status = REQUEST_STATUS.SUCCESS;
-                        })
-                        .catch((err) => {
-                            state.form.status = err;
-                            state.form.message = err.message;
-                            state.request.status = REQUEST_STATUS.ERROR;
-                        })
+                        state.form.value = ''
+                        state.form.message = 'messages.success.add';
+                        state.request.status = REQUEST_STATUS.SUCCESS;
+
+                        if (state.urls.length === 1) {
+                            setTimeout(checkNewPosts, POSTS_UPDATE_INTERVAL);
+                        }
+                    }).catch((err) => {
+                        state.form.status = err;
+                        state.form.message = err.message;
+                        state.request.status = REQUEST_STATUS.ERROR;
+                    })
                 } else {
                     state.form.status = STATUS.INVALIDATE;
                     state.form.message = error
