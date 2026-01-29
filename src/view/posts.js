@@ -2,16 +2,12 @@ const createPostElement = ({ title, id, link }, state) => {
   const item = document.createElement('li')
   item.classList.add('list-group-item', 'mb-4', 'border-0', 'd-flex', 'justify-content-between', 'align-items-center', 'p-0')
 
-  const heading = document.createElement('h3')
-  heading.classList.add('h5', 'mb-0')
-  heading.textContent = title
-
-  const classTitle = state.posts.viewedIds.has(id) ? 'fw-normal' : 'fw-bold'
-  heading.classList.add(classTitle)
-
   const linkElement = document.createElement('a')
   linkElement.href = link
-  linkElement.append(heading)
+  linkElement.textContent = title
+
+  const classTitle = state.posts.viewedIds.has(id) ? 'fw-normal' : 'fw-bold'
+  linkElement.classList.add(classTitle)
 
   const btn = document.createElement('button')
   btn.classList.add('btn', 'btn-outline-primary', 'btn-sm')
