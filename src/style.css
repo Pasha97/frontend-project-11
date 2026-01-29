@@ -1,6 +1,1 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
-
-.form__row {
-    display: flex;
-    gap: 20px;
-}

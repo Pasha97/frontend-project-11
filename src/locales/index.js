@@ -1,9 +1,9 @@
-import ru from './ru';
-import en from './en';
+import ru from './ru'
+import en from './en'
 
 const locales = {
-    ru,
-    en
+  ru,
+  en,
 }
 
 export default locales
